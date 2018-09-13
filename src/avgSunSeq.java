@@ -48,7 +48,9 @@ public class avgSunSeq{
 		}
 
 		//create tree objects 
-		numOfTrees= Integer.parseInt(inputStream.nextLine()); //3rd line
+		numOfTrees= 3000; //3rd line
+
+		int nnumOfTrees= Integer.parseInt(inputStream.nextLine()); //3rd line
 		//vary num of trees 
 		//numOfTrees = 10;
 		treeTotals = new double[numOfTrees];                  //to store single tree exposures
@@ -59,8 +61,11 @@ public class avgSunSeq{
 				treeArr[k]=tree;
 			
 		}
-
-		sumArray(array);
+		
+		
+		//time the summing algorithm 
+		sumArray(treeArr);
+		
 		//write to text file output
 		try{
 			FileWriter writer = new FileWriter(args[1],true);
@@ -75,8 +80,10 @@ public class avgSunSeq{
 	 		e.printStackTrace();
 	 	}
 	}
-	public static void sumArray(double array[][]){
+	public static void sumArray(Tree treeArr[]){
 		//sequential addition of Trees 
+		long timeInit=System.currentTimeMillis(); 
+
 		for (int i=0;i < treeArr.length;i++){
 				int loop_x=treeArr[i].x_pos+treeArr[i].extent;
 				int loop_y=treeArr[i].y_pos+treeArr[i].extent;
@@ -99,6 +106,8 @@ public class avgSunSeq{
 				treeTotals[i]=single_ans;
 				tot_ans+=single_ans;
 			}
+		long timeFinal=System.currentTimeMillis()-timeInit;
+		System.out.println(timeFinal+" ms");
 	}
 
 

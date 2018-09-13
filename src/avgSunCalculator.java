@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.Scanner;
 import java.util.concurrent.ForkJoinPool;
+import java.lang.*;
 
 public class avgSunCalculator{
 	static String inputFilename;
@@ -43,10 +44,13 @@ public class avgSunCalculator{
 			for (int j=0;j<arrXSize;j++){
 				array[i][j]=Double.parseDouble(data[count]);
 				count++;
+				System.out.println(count);
 			}
 		}
 		//create tree objects 
-		numOfTrees= Integer.parseInt(inputStream.nextLine());
+		int numOftTrees= Integer.parseInt(inputStream.nextLine());
+		numOfTrees= 3000;
+
 		treeArr = new Tree[numOfTrees];
 		treeTotals= new double[numOfTrees];
 		for(int k=0;k<numOfTrees;k++){
@@ -54,9 +58,13 @@ public class avgSunCalculator{
 			Tree tree=new Tree(Integer.parseInt(Treedata[1]),Integer.parseInt(Treedata[0]),Integer.parseInt(Treedata[2]));
 			treeArr[k]=tree;
 		}
-		//write a text file 
-		tot_ans=sum(array,treeArr);
+		//time the summing algorithm 
+		long timeInit=System.currentTimeMillis(); 
+		tot_ans=sum(treeArr);
+		long timeFinal=System.currentTimeMillis()-timeInit;
+		System.out.println(timeFinal+"ms");
 
+		//write a text file 
 		try{
 			FileWriter writer = new FileWriter(args[1],true);
 			writer.write(String.valueOf(tot_ans/numOfTrees)+"\n");
@@ -70,8 +78,8 @@ public class avgSunCalculator{
 	 		e.printStackTrace();
 	 	}
 	}
-	static double sum(double[][] array,Tree[] TreeArr){
-		SumArray t = new SumArray(array,TreeArr,0,TreeArr.length);
+	static double sum(Tree[] TreeArr){
+		SumArray t = new SumArray(TreeArr,0,TreeArr.length);
 		return ForkJoinPool.commonPool().invoke(t);
 
 	}

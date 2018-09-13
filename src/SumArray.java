@@ -3,17 +3,17 @@ import java.util.concurrent.RecursiveTask;
 
 class SumArray extends RecursiveTask<Double> {
 	Tree canopy;
-	static int SEQ_THRESHOLD = 1;
+	static int SEQ_THRESHOLD = 20;
 	int lo;
 	int hi;
 	Tree[] treeArr;
 	double[][] array;
 	Double ans=0.0;
 
-	SumArray(double[][] array,Tree[] treeArr,int lo ,int hi){this.array=array;this.treeArr=treeArr;this.hi=hi;this.lo=lo;}
+	SumArray(Tree[] treeArr,int lo ,int hi){this.array=avgSunCalculator.array;this.treeArr=treeArr;this.hi=hi;this.lo=lo;}
 
 	public Double compute(){
-		if(hi-lo==SEQ_THRESHOLD){
+		if(hi-lo<=SEQ_THRESHOLD){
 			double total=0;
 			for (int i=lo;i < hi;i++){
 				int loop_x=treeArr[i].x_pos+treeArr[i].extent;
@@ -38,8 +38,8 @@ class SumArray extends RecursiveTask<Double> {
 			}
 			return total;
 		}else{
-			SumArray left = new SumArray(array,treeArr,lo,(hi+lo)/2);
-			SumArray right = new SumArray(array,treeArr,(hi+lo)/2,hi);
+			SumArray left = new SumArray(treeArr,lo,(hi+lo)/2);
+			SumArray right = new SumArray(treeArr,(hi+lo)/2,hi);
 			left.fork();
 			Double right_ans=right.compute();
 			Double  left_ans=left.join();
