@@ -2,18 +2,17 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
 class SumArray extends RecursiveTask<Double> {
-	Tree canopy;
 	static int SEQ_THRESHOLD = 500;
 	int lo;
 	int hi;
 	Tree[] treeArr;
-	double[][] array;
 	Double ans=0.0;
 
-	SumArray(Tree[] treeArr,int lo ,int hi){this.array=avgSunCalculator.array;this.treeArr=treeArr;this.hi=hi;this.lo=lo;}
+
+	SumArray(Tree[] treeArr,int lo ,int hi){this.treeArr=treeArr;this.hi=hi;this.lo=lo;}
 
 	protected Double compute(){
-		if(hi-lo < SEQ_THRESHOLD){
+		if(hi-lo <= SEQ_THRESHOLD){
 			double total=0;
 			for (int i=lo;i < hi;i++){
 				int loop_x=treeArr[i].x_pos+treeArr[i].extent;
@@ -30,7 +29,7 @@ class SumArray extends RecursiveTask<Double> {
 				double single_ans=0;
 				for(int k=treeArr[i].y_pos;k<loop_y;k++){
 					for(int j=treeArr[i].x_pos;j<loop_x;j++){
-						single_ans+=array[k][j];
+						single_ans+=avgSunCalculator.array[k][j];
 					}
 				}
 			 avgSunCalculator.treeTotals[i]=single_ans;

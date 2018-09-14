@@ -39,7 +39,7 @@ public class avgSunCalculator{
 		//time the summing algorithm 
 		tick();
 		tot_ans=sum(treeArr);
-		System.out.println(tock()+"seconds");
+		System.out.println(tock()+"ms");
 
 		//write a text file
 		writeFileOut(outputFilename);
@@ -53,7 +53,7 @@ public class avgSunCalculator{
 		startTime = System.currentTimeMillis();
 	} 
 	private static float tock(){
-		return (System.currentTimeMillis()-startTime)/1000.0f;
+		return (System.currentTimeMillis()-startTime);
 	}
 	private static void createTerrain(String inputFilename){
 		//open file name 

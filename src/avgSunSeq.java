@@ -29,16 +29,14 @@ public class avgSunSeq{
 		System.gc();
 		inputFilename =args[0];                            //text file input name  
 		outputFilename=args[1];                            //text file output name 
-		tick();
 		createTerrain(inputFilename);
 			                    //create 2D array 
 		createTrees();                                     //create tree objects 
-		System.out.println(tock()); 
 		//time the summing algorithm 
 		tick();
 		sumArray(treeArr);
 		float timeFinal=tock();
-		System.out.println(timeFinal+"s");
+		System.out.println(timeFinal+"ms");
 		//write to text file output
 		writeFileOut(outputFilename);    
 	}
@@ -72,7 +70,7 @@ public class avgSunSeq{
 		startTime = System.currentTimeMillis();
 	} 
 	private static float tock(){
-		return (System.currentTimeMillis()-startTime)/1000.0f;
+		return (System.currentTimeMillis()-startTime);
 	}
 	private static void createTerrain(String inputFilename){
 		//open file name 
@@ -111,7 +109,6 @@ public class avgSunSeq{
 		//numOfTrees = 10;
 			treeTotals = new double[numOfTrees];                  //to store single tree exposures
 			treeArr = new Tree[numOfTrees];
-			System.out.println(numOfTrees);
 			for(int k=0;k<numOfTrees;k++){
 				String [] Treedata= reader.readLine().split(" ");
 				Tree tree=new Tree(Integer.parseInt(Treedata[1]),Integer.parseInt(Treedata[0]),Integer.parseInt(Treedata[2]));
