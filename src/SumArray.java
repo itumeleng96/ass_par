@@ -2,7 +2,7 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
 class SumArray extends RecursiveTask<Double> {
-	static int SEQ_THRESHOLD = 500;
+	static int SEQ_THRESHOLD = 50000;
 	int lo;
 	int hi;
 	Tree[] treeArr;

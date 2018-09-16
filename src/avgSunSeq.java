@@ -24,19 +24,24 @@ public class avgSunSeq{
 	static long startTime=0;
 	static FileInputStream inputStream=null;
 	static BufferedReader reader =null;
+	static int datasize=0;
 	
 	public static void main(String args []){
 		System.gc();
-		inputFilename =args[0];                            //text file input name  
-		outputFilename=args[1];                            //text file output name 
+		inputFilename ="sample_input.txt";                            //text file input name  
+		outputFilename="out.txt";
+		//datasize=Integer.parseInt(args[0]);                           //text file output name 
 		createTerrain(inputFilename);
 			                    //create 2D array 
 		createTrees();                                     //create tree objects 
 		//time the summing algorithm 
+	
+		sumArray(treeArr);
+
 		tick();
 		sumArray(treeArr);
 		float timeFinal=tock();
-		System.out.println(timeFinal+"ms");
+		System.out.println(timeFinal);
 		//write to text file output
 		writeFileOut(outputFilename);    
 	}

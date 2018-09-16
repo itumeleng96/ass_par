@@ -26,20 +26,24 @@ public class avgSunCalculator{
 	static ForkJoinPool fjpool = new ForkJoinPool();
 	static FileInputStream inputStream=null;
 	static BufferedReader reader =null;
-
-
+	
 	public static void main(String args []){
 		System.gc();
-		inputFilename =args[0];  
-		outputFilename=args[1];
-
+		inputFilename ="sample_input.txt";  
+		outputFilename="sampleout.txt";
+		//inputFilename =args[0];  
+		//outputFilename=args[1];
+		numOfTrees=Integer.parseInt(args[0]);
 		createTerrain(inputFilename);
 			                    						   //create 2D array 
 		createTrees();                                     //create tree objects 
 		//time the summing algorithm 
+		//tick();
+		tot_ans=sum(treeArr);
+		
 		tick();
 		tot_ans=sum(treeArr);
-		System.out.println(tock()+"ms");
+		System.out.println(tock());
 
 		//write a text file
 		writeFileOut(outputFilename);
@@ -87,9 +91,10 @@ public class avgSunCalculator{
 	}
 	private static void createTrees(){
 		try{
-			numOfTrees=Integer.parseInt(reader.readLine()); //3rd line
-		//vary num of trees 
-		//numOfTrees = 10;
+			int numOFfTrees=Integer.parseInt(reader.readLine());       //3rd line
+	
+		                                                          //vary num of trees 
+		                                                          //numOfTrees = 10;
 			treeTotals = new double[numOfTrees];                  //to store single tree exposures
 			treeArr = new Tree[numOfTrees];
 			for(int k=0;k<numOfTrees;k++){
