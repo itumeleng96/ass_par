@@ -1,0 +1,9 @@
+#!/bin/bash
+counter=4
+comma=","
+while [ $counter -lt 1000000 ]
+do
+	echo $(java avgSunCalculator $counter) $comma $counter >>out.csv 
+	
+	counter=$(($counter + $(($counter/4))))
+done
